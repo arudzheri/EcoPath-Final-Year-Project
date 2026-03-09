@@ -1,29 +1,14 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
 import { getCityCoords, getPlacesRadius, type GeoName, type Place } from "@/lib/openTripMap";
 import { haversineDistance, compareAllModes, VEHICLE_LABELS } from "@/lib/emissions";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { Search, Loader2 } from "lucide-react";
-
-// Fix leaflet default icons
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
-  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
-});
+import RouteMap from "@/components/RouteMap";
 
 const CITIES = ["London", "Paris", "Berlin", "Rome", "Madrid", "Amsterdam", "Vienna", "Prague", "Barcelona", "Lisbon", "Dublin", "Brussels", "Warsaw", "Budapest", "Athens"];
 const VEHICLE_TYPES = Object.keys(VEHICLE_LABELS);
 
-function MapUpdater({ center }: { center: [number, number] }) {
-  const map = useMap();
-  useEffect(() => { map.setView(center, 8); }, [center, map]);
-  return null;
-}
 
 interface SavedItinerary {
   id: string;
@@ -244,32 +229,14 @@ const FindItineraries = () => {
             <div className="bg-secondary p-6 rounded-lg">
               <h2 className="font-heading text-xl font-bold text-foreground mb-4">Map & Points of Interest</h2>
               <div className="h-[450px] rounded-lg overflow-hidden border border-border">
-                <MapContainer center={mapCenter} zoom={6} className="h-full w-full">
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-                  <MapUpdater center={mapCenter} />
-                  {startGeo && (
-                    <Marker position={[startGeo.lat, startGeo.lon]}>
-                      <Popup><strong>{startCity}</strong> (Start)</Popup>
-                    </Marker>
-                  )}
-                  {endGeo && (
-                    <Marker position={[endGeo.lat, endGeo.lon]}>
-                      <Popup><strong>{endCity}</strong> (Destination)</Popup>
-                    </Marker>
-                  )}
-                  {places.map(p => (
-                    <Marker key={p.xid} position={[p.point.lat, p.point.lon]}>
-                      <Popup>
-                        <strong>{p.name}</strong>
-                        <br />
-                        <span className="text-xs">{p.kinds.split(",").slice(0, 3).join(", ")}</span>
-                      </Popup>
-                    </Marker>
-                  ))}
-                </MapContainer>
+                <RouteMap
+                  center={mapCenter}
+                  startGeo={startGeo}
+                  endGeo={endGeo}
+                  startCity={startCity}
+                  endCity={endCity}
+                  places={places}
+                />
               </div>
               {places.length > 0 && (
                 <div className="mt-4">
