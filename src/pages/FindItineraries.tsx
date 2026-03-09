@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { geoname, getPlacesRadius, type GeoName, type Place } from "@/lib/openTripMap";
+import { getCityCoords, getPlacesRadius, type GeoName, type Place } from "@/lib/openTripMap";
 import { haversineDistance, compareAllModes, VEHICLE_LABELS } from "@/lib/emissions";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { Search, Loader2 } from "lucide-react";
@@ -61,7 +61,8 @@ const FindItineraries = () => {
     setError("");
     setLoading(true);
     try {
-      const [sGeo, eGeo] = await Promise.all([geoname(startCity), geoname(endCity)]);
+      const sGeo = getCityCoords(startCity);
+      const eGeo = getCityCoords(endCity);
       setStartGeo(sGeo);
       setEndGeo(eGeo);
 
