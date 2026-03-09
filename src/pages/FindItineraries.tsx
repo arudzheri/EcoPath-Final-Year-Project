@@ -9,11 +9,6 @@ import RouteMap from "@/components/RouteMap";
 const CITIES = ["London", "Paris", "Berlin", "Rome", "Madrid", "Amsterdam", "Vienna", "Prague", "Barcelona", "Lisbon", "Dublin", "Brussels", "Warsaw", "Budapest", "Athens"];
 const VEHICLE_TYPES = Object.keys(VEHICLE_LABELS);
 
-function MapUpdater({ center }: { center: [number, number] }) {
-  const map = useMap();
-  useEffect(() => { map.setView(center, 8); }, [center, map]);
-  return null;
-}
 
 interface SavedItinerary {
   id: string;
