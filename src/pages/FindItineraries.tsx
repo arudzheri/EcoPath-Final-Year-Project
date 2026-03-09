@@ -229,32 +229,14 @@ const FindItineraries = () => {
             <div className="bg-secondary p-6 rounded-lg">
               <h2 className="font-heading text-xl font-bold text-foreground mb-4">Map & Points of Interest</h2>
               <div className="h-[450px] rounded-lg overflow-hidden border border-border">
-                <MapContainer center={mapCenter} zoom={6} className="h-full w-full">
-                  <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  />
-                  <MapUpdater center={mapCenter} />
-                  {startGeo && (
-                    <Marker position={[startGeo.lat, startGeo.lon]}>
-                      <Popup><strong>{startCity}</strong> (Start)</Popup>
-                    </Marker>
-                  )}
-                  {endGeo && (
-                    <Marker position={[endGeo.lat, endGeo.lon]}>
-                      <Popup><strong>{endCity}</strong> (Destination)</Popup>
-                    </Marker>
-                  )}
-                  {places.map(p => (
-                    <Marker key={p.xid} position={[p.point.lat, p.point.lon]}>
-                      <Popup>
-                        <strong>{p.name}</strong>
-                        <br />
-                        <span className="text-xs">{p.kinds.split(",").slice(0, 3).join(", ")}</span>
-                      </Popup>
-                    </Marker>
-                  ))}
-                </MapContainer>
+                <RouteMap
+                  center={mapCenter}
+                  startGeo={startGeo}
+                  endGeo={endGeo}
+                  startCity={startCity}
+                  endCity={endCity}
+                  places={places}
+                />
               </div>
               {places.length > 0 && (
                 <div className="mt-4">
