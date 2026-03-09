@@ -61,7 +61,8 @@ const FindItineraries = () => {
     setError("");
     setLoading(true);
     try {
-      const [sGeo, eGeo] = await Promise.all([geoname(startCity), geoname(endCity)]);
+      const sGeo = getCityCoords(startCity);
+      const eGeo = getCityCoords(endCity);
       setStartGeo(sGeo);
       setEndGeo(eGeo);
 
