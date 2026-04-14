@@ -1,71 +1,118 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Leaf, MapPin, BarChart3, ArrowRight } from "lucide-react";
+import { Leaf, MapPin, BarChart3, ArrowRight, TreePine, Globe2, Zap } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Index = () => {
   return (
-    <div className="pt-16">
+    <div className="pt-14">
       {/* Hero */}
-      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
         <img src={heroBg} alt="Sustainable travel landscape" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-eco-dark/50" />
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 text-center px-6 max-w-3xl"
-        >
-          <h1 className="font-heading text-5xl md:text-7xl font-black text-primary-foreground mb-6 leading-tight">
-            Visit <span className="text-primary">EcoPath</span>
-          </h1>
-          <p className="text-primary-foreground/90 text-lg md:text-xl mb-8 font-body">
-            Plan your travels sustainably. Compare carbon emissions across transport modes and discover eco-friendly destinations.
-          </p>
-          <Link
-            to="/find"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 font-heading font-bold text-lg hover:brightness-110 transition-all"
+        <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/50 to-transparent" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-2xl"
           >
-            Find Itineraries <ArrowRight className="h-5 w-5" />
-          </Link>
-        </motion.div>
+            <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-primary/30">
+              <TreePine className="h-4 w-4" />
+              Sustainable Travel Planning
+            </div>
+            <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6">
+              Travel with a<br />
+              <span className="text-primary">lighter footprint</span>
+            </h1>
+            <p className="text-white/75 text-lg md:text-xl mb-10 font-body leading-relaxed max-w-lg">
+              Compare carbon emissions across transport modes, discover eco-friendly destinations, and plan trips that respect the planet.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                to="/find"
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 rounded-lg font-heading font-semibold text-base hover:brightness-110 transition-all shadow-lg shadow-primary/25"
+              >
+                Plan a Trip <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/manage"
+                className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-7 py-3.5 rounded-lg font-heading font-semibold text-base hover:bg-white/20 transition-all border border-white/20"
+              >
+                My Itineraries
+              </Link>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
-      {/* What is EcoPath */}
-      <section className="py-20 px-6 bg-background">
-        <div className="max-w-5xl mx-auto">
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            <div className="w-16 h-1 bg-primary mb-6" />
-            <h2 className="font-heading text-4xl font-black text-foreground mb-6">
-              What is <span className="text-primary">EcoPath</span>?
+      {/* Features */}
+      <section className="py-24 px-6 bg-background">
+        <div className="max-w-6xl mx-auto">
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-16">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
+              How <span className="text-primary">ecopath</span> works
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl">
-              EcoPath is a sustainable travel itinerary planner that helps you make environmentally responsible travel decisions. 
-              It calculates the carbon footprint of your trips, compares transport modes, and suggests eco-friendly destinations 
-              — all in one place.
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Three simple steps to plan a sustainable journey across Europe.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 mt-16">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: MapPin, title: "Route Planning", desc: "Enter your start and end locations to generate travel routes with distance calculations." },
-              { icon: BarChart3, title: "Emission Comparison", desc: "Compare CO₂ emissions across car, bus, train, plane, bicycle and walking." },
-              { icon: Leaf, title: "Eco Destinations", desc: "Discover nearby points of interest using OpenTripMap integration." },
+              {
+                icon: MapPin,
+                step: "01",
+                title: "Choose Your Route",
+                desc: "Select start and end cities. We calculate the straight-line distance using the Haversine formula.",
+              },
+              {
+                icon: BarChart3,
+                step: "02",
+                title: "Compare Emissions",
+                desc: "See CO₂ output for car, bus, train, plane, bicycle and walking — side by side.",
+              },
+              {
+                icon: Globe2,
+                step: "03",
+                title: "Explore & Save",
+                desc: "View your route on the map, discover nearby attractions, get a sustainability grade, and save your itinerary.",
+              },
             ].map((item, i) => (
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                className="bg-secondary p-8 rounded-lg"
+                transition={{ delay: i * 0.12 }}
+                className="relative bg-card border border-border rounded-xl p-8 hover:shadow-lg hover:shadow-primary/5 transition-shadow"
               >
-                <item.icon className="h-10 w-10 text-primary mb-4" />
-                <h3 className="font-heading text-xl font-bold text-foreground mb-2">{item.title}</h3>
-                <p className="text-muted-foreground font-body">{item.desc}</p>
+                <span className="font-heading text-5xl font-bold text-primary/10 absolute top-4 right-6">{item.step}</span>
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-5">
+                  <item.icon className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-heading text-lg font-bold text-foreground mb-2">{item.title}</h3>
+                <p className="text-muted-foreground font-body text-sm leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 px-6 bg-secondary">
+        <div className="max-w-3xl mx-auto text-center">
+          <Leaf className="h-10 w-10 text-primary mx-auto mb-4" />
+          <h2 className="font-heading text-3xl font-bold text-foreground mb-4">Ready to travel sustainably?</h2>
+          <p className="text-muted-foreground mb-8">
+            Every journey matters. Start planning your next eco-friendly trip today.
+          </p>
+          <Link
+            to="/find"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-lg font-heading font-semibold hover:brightness-110 transition-all"
+          >
+            Get Started <Zap className="h-4 w-4" />
+          </Link>
         </div>
       </section>
     </div>
