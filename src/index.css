@@ -2,43 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 150 10% 15%;
+    --background: 160 15% 97%;
+    --foreground: 160 25% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 150 10% 15%;
+    --card-foreground: 160 25% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 150 10% 15%;
+    --popover-foreground: 160 25% 12%;
 
-    --primary: 90 65% 45%;
+    --primary: 162 63% 41%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 150 10% 95%;
-    --secondary-foreground: 150 10% 15%;
+    --secondary: 160 12% 92%;
+    --secondary-foreground: 160 25% 12%;
 
-    --muted: 150 10% 95%;
-    --muted-foreground: 150 5% 45%;
+    --muted: 160 10% 93%;
+    --muted-foreground: 160 8% 46%;
 
-    --accent: 90 65% 45%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 42 92% 56%;
+    --accent-foreground: 42 92% 12%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 150 10% 88%;
-    --input: 150 10% 88%;
-    --ring: 90 65% 45%;
+    --border: 160 12% 88%;
+    --input: 160 12% 88%;
+    --ring: 162 63% 41%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --eco-dark: 150 30% 20%;
-    --eco-light: 90 40% 95%;
-    --eco-accent: 45 100% 55%;
+    --eco-dark: 160 30% 14%;
+    --eco-light: 160 20% 96%;
+    --eco-accent: 42 92% 56%;
+    --eco-teal: 162 63% 41%;
+    --eco-emerald: 152 55% 48%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -49,30 +51,30 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Open Sans', sans-serif;
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
   }
 
   .dark {
-    --background: 150 15% 8%;
-    --foreground: 150 5% 95%;
-    --card: 150 15% 12%;
-    --card-foreground: 150 5% 95%;
-    --popover: 150 15% 12%;
-    --popover-foreground: 150 5% 95%;
-    --primary: 90 65% 45%;
+    --background: 160 20% 6%;
+    --foreground: 160 10% 92%;
+    --card: 160 18% 10%;
+    --card-foreground: 160 10% 92%;
+    --popover: 160 18% 10%;
+    --popover-foreground: 160 10% 92%;
+    --primary: 162 63% 41%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 150 10% 18%;
-    --secondary-foreground: 150 5% 95%;
-    --muted: 150 10% 18%;
-    --muted-foreground: 150 5% 55%;
-    --accent: 90 65% 45%;
-    --accent-foreground: 0 0% 100%;
+    --secondary: 160 15% 15%;
+    --secondary-foreground: 160 10% 92%;
+    --muted: 160 15% 15%;
+    --muted-foreground: 160 8% 55%;
+    --accent: 42 92% 56%;
+    --accent-foreground: 42 92% 12%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
-    --border: 150 10% 22%;
-    --input: 150 10% 22%;
-    --ring: 90 65% 45%;
+    --border: 160 12% 20%;
+    --input: 160 12% 20%;
+    --ring: 162 63% 41%;
   }
 }
 
@@ -97,3 +99,14 @@
   height: 100%;
   z-index: 0;
 }
+
+/* Sustainability grade badge */
+.grade-badge {
+  @apply inline-flex items-center justify-center w-14 h-14 rounded-full font-heading font-bold text-xl;
+}
+.grade-A { @apply bg-primary/20 text-primary; }
+.grade-B { @apply bg-emerald-100 text-emerald-700; }
+.grade-C { @apply bg-amber-100 text-amber-700; }
+.grade-D { @apply bg-orange-100 text-orange-700; }
+.grade-E { @apply bg-red-100 text-red-600; }
+.grade-F { @apply bg-red-200 text-red-800; }

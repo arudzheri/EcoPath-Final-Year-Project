@@ -30,6 +30,20 @@ export function compareAllModes(distanceKm: number, groupSize: number = 1) {
   }));
 }
 
+/**
+ * Sustainability grade A–F based on per-person emissions for the trip.
+ * A = zero/near-zero, F = heavy emitter.
+ */
+export function getSustainabilityGrade(emissionsPerPerson: number): { grade: string; label: string; color: string } {
+  if (emissionsPerPerson <= 0) return { grade: "A", label: "Excellent — Zero Emissions", color: "grade-A" };
+  if (emissionsPerPerson <= 15) return { grade: "A", label: "Excellent — Very Low Impact", color: "grade-A" };
+  if (emissionsPerPerson <= 40) return { grade: "B", label: "Good — Low Impact", color: "grade-B" };
+  if (emissionsPerPerson <= 80) return { grade: "C", label: "Moderate Impact", color: "grade-C" };
+  if (emissionsPerPerson <= 150) return { grade: "D", label: "High Impact", color: "grade-D" };
+  if (emissionsPerPerson <= 250) return { grade: "E", label: "Very High Impact", color: "grade-E" };
+  return { grade: "F", label: "Severe Impact", color: "grade-F" };
+}
+
 // Haversine distance between two lat/lon points in km
 export function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const R = 6371;
