@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Leaf, MapPin, BarChart3, ArrowRight, TreePine, Globe2, Zap } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import ecopath from "@/assets/ecopath.jpeg";
 
 const Index = () => {
   return (
     <div className="pt-14">
       {/* Hero */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <img src={heroBg} alt="Sustainable travel landscape" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={ecopath} alt="Sustainable travel landscape" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/50 to-transparent" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 w-full">
           <motion.div
