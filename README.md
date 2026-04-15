@@ -1,73 +1,92 @@
-# Welcome to your Lovable project
+# 🌍 EcoPath — Sustainable Itinerary Planner
 
-## Project info
+**EcoPath** is a full‑stack web application that helps users plan environmentally conscious travel by generating itineraries, calculating CO₂ emissions, and exploring nearby points of interest (POIs).
+Built as a Final Year Project for BSc Computer Science, it combines real‑time geolocation data, sustainability metrics, and a clean, interactive UI.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+---
 
-## How can I edit this code?
+## 📚 Project Overview
 
-There are several ways of editing your application.
+**Goal:**  
+Travel emissions are a major contributor to climate change.
 
-**Use Lovable**
+**Motivation:**  
+EcoPath empowers users to make informed, sustainable travel decisions by visualising the environmental impact of different transport modes and exploring eco‑friendly destinations.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📌 Key Features (Prototype Stage)
 
-**Use your preferred IDE**
+- 📍 User enters **Origin** and **Destination**
+- 🔢 Calculates estimated **Distance**
+- 🌱 Computes **CO₂ Emissions** using predefined emission factors
+- 📊 Displays **Comparison across modes**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 📥 Inputs & Outputs
 
-Follow these steps:
+### Inputs
+- **Origin location** (string)
+- **Destination location** (string)
+- **Transport mode** (dropdown selection: car, train, bus, flight)
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Outputs
+- Calculated travel **distance**
+- Estimated **CO₂ emissions** for selected mode(s)
+- A table/graph view comparing emissions
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 📦 Tech Stack
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+| Component | Technologies |
+|-----------|--------------|
+| Frontend | React.js |
+| Backend | Node.js + Express |
+| APIs | OpenTripMap (geocoding & routing) |
+| Data | DEFRA CO₂ Emission Factors |
+| Tools | Vite |
+
+---
+
+## 💻 Local Development
+
+### Requirements
+- Node.js
+- npm
+
+### Setup Instructions
+
+```bash
+# Clone the repository
+git clone https://github.com/arudzheri/EcoPath-Final-Year-Project.git
+
+# Navigate to the project directory
+cd EcoPath-Final-Year-Project
+
+# Install frontend dependencies
+npm install
+npm run dev
+
+# Setup backend
+cd backend
+npm install
+
+# Start backend
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📄 License
 
-**Use GitHub Codespaces**
+This project is for academic use as part of the Final Year Project at the University of Westminster.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## 👤 Author
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+**Andzhelo Rudzheri**  
+BSc Computer Science
+University of Westminster
