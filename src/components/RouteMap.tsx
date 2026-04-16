@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import type { GeoName, Place } from "@/lib/openTripMap";
+import type { Place } from "@/lib/openTripMap";
+import type { RouteStop } from "@/lib/routePlanner";
 
 // Fix leaflet default icons
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -30,35 +31,37 @@ const endIcon = new L.Icon({
   shadowSize: [41, 41],
 });
 
-function MapUpdater({ center, bounds }: { center: [number, number]; bounds?: L.LatLngBoundsExpression }) {
+const stopIcon = new L.Icon({
+  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+function MapUpdater({ stops }: { stops: RouteStop[] }) {
   const map = useMap();
   useEffect(() => {
-    if (bounds) {
+    if (stops.length >= 2) {
+      const bounds = L.latLngBounds(stops.map(s => [s.city.lat, s.city.lon]));
       map.fitBounds(bounds, { padding: [50, 50] });
-    } else {
-      map.setView(center, 6);
+    } else if (stops.length === 1) {
+      map.setView([stops[0].city.lat, stops[0].city.lon], 10);
     }
-  }, [center, bounds, map]);
+  }, [stops, map]);
   return null;
 }
 
 interface Props {
   center: [number, number];
-  startGeo: GeoName | null;
-  endGeo: GeoName | null;
-  startCity: string;
-  endCity: string;
+  stops: RouteStop[];
   places: Place[];
 }
 
-const RouteMap = ({ center, startGeo, endGeo, startCity, endCity, places }: Props) => {
-  const routeLine: [number, number][] = startGeo && endGeo
-    ? [[startGeo.lat, startGeo.lon], [endGeo.lat, endGeo.lon]]
-    : [];
-
-  const bounds: L.LatLngBoundsExpression | undefined = startGeo && endGeo
-    ? [[startGeo.lat, startGeo.lon], [endGeo.lat, endGeo.lon]]
-    : undefined;
+const RouteMap = ({ center, stops, places }: Props) => {
+  // Build polyline through all stops
+  const routeLine: [number, number][] = stops.map(s => [s.city.lat, s.city.lon]);
 
   return (
     <MapContainer center={center} zoom={6} style={{ height: "100%", width: "100%" }}>
@@ -66,25 +69,37 @@ const RouteMap = ({ center, startGeo, endGeo, startCity, endCity, places }: Prop
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <MapUpdater center={center} bounds={bounds} />
+      <MapUpdater stops={stops} />
 
-      {routeLine.length === 2 && (
+      {/* Multi-stop polyline */}
+      {routeLine.length >= 2 && (
         <Polyline
           positions={routeLine}
           pathOptions={{ color: "#0d9488", weight: 3, dashArray: "8 6", opacity: 0.8 }}
         />
       )}
 
-      {startGeo && (
-        <Marker position={[startGeo.lat, startGeo.lon]} icon={startIcon}>
-          <Popup><strong>{startCity}</strong> (Start)</Popup>
-        </Marker>
-      )}
-      {endGeo && (
-        <Marker position={[endGeo.lat, endGeo.lon]} icon={endIcon}>
-          <Popup><strong>{endCity}</strong> (Destination)</Popup>
-        </Marker>
-      )}
+      {/* Stop markers */}
+      {stops.map((stop, i) => {
+        const isFirst = i === 0;
+        const isLast = i === stops.length - 1;
+        const icon = isFirst ? startIcon : isLast ? endIcon : stopIcon;
+
+        return (
+          <Marker key={stop.city.name + i} position={[stop.city.lat, stop.city.lon]} icon={icon}>
+            <Popup>
+              <strong>Stop {i + 1}: {stop.city.name}</strong>
+              <br />
+              <span style={{ fontSize: "0.75rem" }}>
+                {isFirst ? "Start" : isLast ? "Destination" : `Day ${stop.day}`}
+                {stop.distanceFromPrev > 0 && ` · ${stop.distanceFromPrev} km from prev`}
+              </span>
+            </Popup>
+          </Marker>
+        );
+      })}
+
+      {/* POI markers */}
       {places.map((p) => (
         <Marker key={p.xid} position={[p.point.lat, p.point.lon]}>
           <Popup>
