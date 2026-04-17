@@ -8,33 +8,43 @@ Built as a Final Year Project for BSc Computer Science, it combines real‑time 
 ## 📚 Project Overview
 
 **Goal:**  
-Travel emissions are a major contributor to climate change.
+EcoPath is a sustainability‑focused itinerary planner designed to help users make environmentally conscious travel decisions. The system calculates estimated carbon emissions for different travel modes and provides users with greener alternatives.
 
 **Motivation:**  
-EcoPath empowers users to make informed, sustainable travel decisions by visualising the environmental impact of different transport modes and exploring eco‑friendly destinations.
+The project was developed as part of a Final Year Project in BSc Computer Science, with emphasis on:
+
+- Sustainable technology
+- API‑driven system design
+- Full‑stack development
+- Ethical and transparent carbon estimation
 
 ---
 
-## 📌 Key Features (Prototype Stage)
+## 🚀 Key Features
 
-- 📍 User enters **Origin** and **Destination**
-- 🔢 Calculates estimated **Distance**
-- 🌱 Computes **CO₂ Emissions** using predefined emission factors
-- 📊 Displays **Comparison across modes**
+- 🌱 Carbon‑aware route planning using DEFRA emission factors
+- 🗺️ Interactive map interface for selecting destinations
+- 🚉 Multi‑modal transport comparison (walking, cycling, public transport, car)
+- 📊 Sustainability scoring system
+- 🔍 Real‑time location search via OpenTripMap API
+- 💡 User‑friendly UI built with React + TypeScript
+- ⚙️ Backend API for carbon calculations and data processing
 
 ---
 
-## 📥 Inputs & Outputs
+## 🏗️ System Architecture
 
-### Inputs
-- **Origin location** (string)
-- **Destination location** (string)
-- **Transport mode** (dropdown selection: car, train, bus, flight)
+### Frontend
+- React + TypeScript
+- Vite build system
+- TailwindCSS for styling
+- Map rendering and UI components
 
-### Outputs
-- Calculated travel **distance**
-- Estimated **CO₂ emissions** for selected mode(s)
-- A table/graph view comparing emissions
+### Backend
+- Node.js + Express
+- Carbon calculation logic
+- API endpoints for itinerary generation
+- Integration with OpenTripMap
 
 ---
 
@@ -42,7 +52,7 @@ EcoPath empowers users to make informed, sustainable travel decisions by visuali
 
 | Component | Technologies |
 |-----------|--------------|
-| Frontend | React.js |
+| Frontend | React.js, TypeScript, TailwindCSS |
 | Backend | Node.js + Express |
 | APIs | OpenTripMap (geocoding & routing) |
 | Data | DEFRA CO₂ Emission Factors |
@@ -50,7 +60,7 @@ EcoPath empowers users to make informed, sustainable travel decisions by visuali
 
 ---
 
-## 💻 Local Development
+## 💻 Installation & Setup
 
 ### Requirements
 - Node.js
@@ -65,23 +75,59 @@ git clone https://github.com/arudzheri/EcoPath-Final-Year-Project.git
 # Navigate to the project directory
 cd EcoPath-Final-Year-Project
 
-# Install frontend dependencies
-npm install
-npm run dev
-
-# Setup backend
-cd backend
+# Install dependencies
 npm install
 
-# Start backend
+# Start the development server
 npm run dev
 ```
+
+---
+
+## 📊 Carbon Calculation Method
+
+EcoPath uses **DEFRA 2024 emission factors**, which provide standardised values for:
+
+- Car
+- Bus
+- Rail
+- Cycling
+- Walking
+
+**Note:** DEFRA factors are averaged values and do not account for real‑time variables such as traffic or vehicle efficiency. 
+This introduces limitations, but the method was chosen for its transparency and suitability for a prototype system.
+
+---
+
+## 🧪 Testing
+
+Testing included:
+
+- Unit tests for carbon calculations
+- API endpoint validation
+- UI usability checks
+- Map interaction testing
+
+Limitations of testing:
+
+- Small number of users
+- No large‑scale performance testing
+- API dependency may affect reliability
 
 ---
 
 ## 📄 License
 
 This project is for academic use as part of the Final Year Project at the University of Westminster.
+
+---
+
+## 🙌 Acknowledgements
+
+- DEFRA for emission factor datasets
+- OpenTripMap for location data
+- University of Westminster – Final Year Project
+- Supervisor support and guidance
 
 ---
 
