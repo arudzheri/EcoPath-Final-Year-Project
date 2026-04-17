@@ -1,115 +1,54 @@
-import { useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from "react-leaflet";
-import L from "leaflet";
+import { MapContainer, TileLayer, Marker, Polyline } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import type { Place } from "@/lib/openTripMap";
-import type { RouteStop } from "@/lib/routePlanner";
-
-// Fix leaflet default icons
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
-  iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
-});
-
-const startIcon = new L.Icon({
-  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
-const endIcon = new L.Icon({
-  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
-const stopIcon = new L.Icon({
-  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
-  shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
-function MapUpdater({ stops }: { stops: RouteStop[] }) {
-  const map = useMap();
-  useEffect(() => {
-    if (stops.length >= 2) {
-      const bounds = L.latLngBounds(stops.map(s => [s.city.lat, s.city.lon]));
-      map.fitBounds(bounds, { padding: [50, 50] });
-    } else if (stops.length === 1) {
-      map.setView([stops[0].city.lat, stops[0].city.lon], 10);
-    }
-  }, [stops, map]);
-  return null;
-}
+import L from "leaflet";
+import type { PlannedRoute } from "@/lib/routePlanner";
 
 interface Props {
-  center: [number, number];
-  stops: RouteStop[];
-  places: Place[];
+  route: PlannedRoute;
 }
 
-const RouteMap = ({ center, stops, places }: Props) => {
-  // Build polyline through all stops
-  const routeLine: [number, number][] = stops.map(s => [s.city.lat, s.city.lon]);
+const RouteMap = ({ route }: Props) => {
+  const start = route.stops[0].city;
+  const end = route.stops[route.stops.length - 1].city;
+
+  const startIcon = L.icon({
+    iconUrl: "/start-marker.png",
+    iconSize: [32, 32],
+  });
+
+  const endIcon = L.icon({
+    iconUrl: "/end-marker.png",
+    iconSize: [32, 32],
+  });
+
+  const polylinePositions = route.stops.map((stop) => [
+    stop.city.lat,
+    stop.city.lon,
+  ]);
 
   return (
-    <MapContainer center={center} zoom={6} style={{ height: "100%", width: "100%" }}>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <MapUpdater stops={stops} />
-
-      {/* Multi-stop polyline */}
-      {routeLine.length >= 2 && (
-        <Polyline
-          positions={routeLine}
-          pathOptions={{ color: "#0d9488", weight: 3, dashArray: "8 6", opacity: 0.8 }}
+    <div className="w-full h-[400px] rounded-lg border border-gray-300 shadow overflow-hidden">
+      <MapContainer
+        center={[start.lat, start.lon]}
+        zoom={6}
+        scrollWheelZoom={false}
+        className="w-full h-full"
+      >
+        <TileLayer
+          attribution='&copy; OpenStreetMap contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-      )}
 
-      {/* Stop markers */}
-      {stops.map((stop, i) => {
-        const isFirst = i === 0;
-        const isLast = i === stops.length - 1;
-        const icon = isFirst ? startIcon : isLast ? endIcon : stopIcon;
+        {/* Start marker */}
+        <Marker position={[start.lat, start.lon]} icon={startIcon} />
 
-        return (
-          <Marker key={stop.city.name + i} position={[stop.city.lat, stop.city.lon]} icon={icon}>
-            <Popup>
-              <strong>Stop {i + 1}: {stop.city.name}</strong>
-              <br />
-              <span style={{ fontSize: "0.75rem" }}>
-                {isFirst ? "Start" : isLast ? "Destination" : `Day ${stop.day}`}
-                {stop.distanceFromPrev > 0 && ` · ${stop.distanceFromPrev} km from prev`}
-              </span>
-            </Popup>
-          </Marker>
-        );
-      })}
+        {/* End marker */}
+        <Marker position={[end.lat, end.lon]} icon={endIcon} />
 
-      {/* POI markers */}
-      {places.map((p) => (
-        <Marker key={p.xid} position={[p.point.lat, p.point.lon]}>
-          <Popup>
-            <strong>{p.name}</strong>
-            <br />
-            <span style={{ fontSize: "0.75rem" }}>{p.kinds.split(",").slice(0, 3).join(", ")}</span>
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+        {/* Route polyline */}
+        <Polyline positions={polylinePositions} color="#2563eb" weight={4} />
+      </MapContainer>
+    </div>
   );
 };
 
