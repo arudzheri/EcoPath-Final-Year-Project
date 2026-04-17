@@ -1,32 +1,27 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import Navbar from "@/components/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Index from "./pages/Index";
 import FindItineraries from "./pages/FindItineraries";
 import ManageItineraries from "./pages/ManageItineraries";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-white text-gray-900">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/find" element={<FindItineraries />} />
-          <Route path="/manage" element={<ManageItineraries />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+
+        <main className="max-w-6xl mx-auto px-4 py-6">
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/find" element={<FindItineraries />} />
+            <Route path="/manage" element={<ManageItineraries />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
+  );
+}
 
 export default App;
