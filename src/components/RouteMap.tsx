@@ -21,7 +21,7 @@ const RouteMap = ({ route }: Props) => {
     iconSize: [32, 32],
   });
 
-  const polylinePositions = route.stops.map((stop) => [
+  const polylinePositions: [number, number][] = route.stops.map((stop) => [
     stop.city.lat,
     stop.city.lon,
   ]);
