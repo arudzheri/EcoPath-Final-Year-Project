@@ -4,109 +4,49 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
 
-@layer base {
-  :root {
-    --background: 160 15% 97%;
-    --foreground: 160 25% 12%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 160 25% 12%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 160 25% 12%;
-
-    --primary: 162 63% 41%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 160 12% 92%;
-    --secondary-foreground: 160 25% 12%;
-
-    --muted: 160 10% 93%;
-    --muted-foreground: 160 8% 46%;
-
-    --accent: 42 92% 56%;
-    --accent-foreground: 42 92% 12%;
-
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 160 12% 88%;
-    --input: 160 12% 88%;
-    --ring: 162 63% 41%;
-
-    --radius: 0.75rem;
-
-    --eco-dark: 160 30% 14%;
-    --eco-light: 160 20% 96%;
-    --eco-accent: 42 92% 56%;
-    --eco-teal: 162 63% 41%;
-    --eco-emerald: 152 55% 48%;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-
-    --font-heading: 'Space Grotesk', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-  }
-
-  .dark {
-    --background: 160 20% 6%;
-    --foreground: 160 10% 92%;
-    --card: 160 18% 10%;
-    --card-foreground: 160 10% 92%;
-    --popover: 160 18% 10%;
-    --popover-foreground: 160 10% 92%;
-    --primary: 162 63% 41%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 160 15% 15%;
-    --secondary-foreground: 160 10% 92%;
-    --muted: 160 15% 15%;
-    --muted-foreground: 160 8% 55%;
-    --accent: 42 92% 56%;
-    --accent-foreground: 42 92% 12%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 160 12% 20%;
-    --input: 160 12% 20%;
-    --ring: 162 63% 41%;
-  }
+/* Custom fonts */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-body);
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-  }
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
 }
 
-/* Leaflet overrides */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Global resets */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  background-color: white;
+  color: black;
+}
+
+/* Map container fix */
 .leaflet-container {
   width: 100%;
   height: 100%;
-  z-index: 0;
 }
-
-/* Sustainability grade badge */
-.grade-badge {
-  @apply inline-flex items-center justify-center w-14 h-14 rounded-full font-heading font-bold text-xl;
-}
-.grade-A { @apply bg-primary/20 text-primary; }
-.grade-B { @apply bg-emerald-100 text-emerald-700; }
-.grade-C { @apply bg-amber-100 text-amber-700; }
-.grade-D { @apply bg-orange-100 text-orange-700; }
-.grade-E { @apply bg-red-100 text-red-600; }
-.grade-F { @apply bg-red-200 text-red-800; }
