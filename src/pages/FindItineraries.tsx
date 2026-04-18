@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
 import { getCityData, CITY_NAMES, getRegions, getCitiesByRegion } from "@/lib/cities";
 import { haversineDistance, compareAllModes, VEHICLE_LABELS, getSustainabilityGrade, EMISSION_FACTORS } from "@/lib/emissions";
 import { validateItinerary, getFeasibleModes } from "@/lib/validation";
