@@ -24,7 +24,7 @@ The project was developed as part of a Final Year Project in BSc Computer Scienc
 
 - 🌱 Carbon‑aware route planning using DEFRA emission factors
 - 🗺️ Interactive map interface for selecting destinations
-- 🚉 Multi‑modal transport comparison (walking, cycling, public transport, car)
+- 🚉 Multi‑modal transport comparison (car, walking, cycling, public transport)
 - 📊 Sustainability scoring system
 - 🔍 Real‑time location search via OpenTripMap API
 - 💡 User‑friendly UI built with React + TypeScript
