@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer"
 import { getCityData, CITY_NAMES, getRegions, getCitiesByRegion } from "@/lib/cities";
 import { haversineDistance, compareAllModes, VEHICLE_LABELS, getSustainabilityGrade, EMISSION_FACTORS } from "@/lib/emissions";
 import { validateItinerary, getFeasibleModes } from "@/lib/validation";
@@ -309,7 +307,11 @@ const FindItineraries = () => {
             <div className="bg-card border border-border rounded-xl p-6 md:p-8">
               <h2 className="font-heading text-lg font-bold text-foreground mb-4">Route Map & Points of Interest</h2>
               <div className="h-[420px] rounded-lg overflow-hidden border border-border">
-                <RouteMap route={route} />
+                <RouteMap
+                  center={mapCenter}
+                  stops={route.stops}
+                  places={places}
+                />
               </div>
               {places.length > 0 && (
                 <div className="mt-5">
