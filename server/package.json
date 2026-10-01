@@ -1,0 +1,33 @@
+{
+  "name": "ecopath-backend",
+  "version": "1.0.0",
+  "description": "EcoPath backend - Node.js + Express API for carbon calculations",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint src",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "axios": "^1.6.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.0.0",
+    "@types/cors": "^2.8.13",
+    "typescript": "^5.0.0",
+    "tsx": "^3.12.0",
+    "eslint": "^8.40.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "vitest": "^0.34.0"
+  }
+}
