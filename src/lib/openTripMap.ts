@@ -1,4 +1,4 @@
-const API_KEY = "5ae2e3f221c38a28845f05b62488ef7244ce4d54ddd11cf89b42ea97";
+const API_KEY = import.meta.env.VITE_OPENTRIPMAP_KEY;
 const BASE = "https://api.opentripmap.com/0.1/en/places";
 
 // Built-in city coordinates as fallback
