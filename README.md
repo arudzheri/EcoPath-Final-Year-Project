@@ -1,6 +1,6 @@
 # 🌍 EcoPath — Sustainable Itinerary Planner
 
-**EcoPath** is a full‑stack web application that helps users plan environmentally conscious travel by generating itineraries, calculating CO₂ emissions, and exploring nearby points of interest (POIs).
+**EcoPath** is a web application that helps users plan environmentally conscious travel by generating itineraries, calculating CO₂ emissions, and exploring nearby points of interest.
 Built as a Final Year Project for BSc Computer Science, it combines real‑time geolocation data, sustainability metrics, and a clean, interactive UI.
 
 ---
@@ -8,14 +8,14 @@ Built as a Final Year Project for BSc Computer Science, it combines real‑time 
 ## 📚 Project Overview
 
 **Goal:**  
-EcoPath is a sustainability‑focused itinerary planner designed to help users make environmentally conscious travel decisions. The system calculates estimated carbon emissions for different travel modes and provides users with greener alternatives.
+EcoPath is a sustainability‑focused itinerary planner designed to help users make environmentally conscious travel decisions. The system calculates estimated carbon emissions for different transport modes and suggests lower-carbon route options.
 
 **Motivation:**  
 The project was developed as part of a Final Year Project in BSc Computer Science, with emphasis on:
 
 - Sustainable technology
 - API‑driven system design
-- Full‑stack development
+- Frontend development
 - Ethical and transparent carbon estimation
 
 ---
@@ -28,7 +28,6 @@ The project was developed as part of a Final Year Project in BSc Computer Scienc
 - 📊 Sustainability scoring system
 - 🔍 Real‑time location search via OpenTripMap API
 - 💡 User‑friendly UI built with React + TypeScript
-- ⚙️ Backend API for carbon calculations and data processing
 
 ---
 
@@ -40,11 +39,11 @@ The project was developed as part of a Final Year Project in BSc Computer Scienc
 - TailwindCSS for styling
 - Map rendering and UI components
 
-### Backend
-- Node.js + Express
-- Carbon calculation logic
-- API endpoints for itinerary generation
-- Integration with OpenTripMap
+### Backend (added after submission, October 2026 – work in progress)
+
+- A separate Node.js + Express API in the /server folder
+- Carbon calculation and itinerary endpoints
+- Not yet connected to the frontend
 
 ---
 
@@ -53,7 +52,7 @@ The project was developed as part of a Final Year Project in BSc Computer Scienc
 | Component | Technologies |
 |-----------|--------------|
 | Frontend | React.js, TypeScript, TailwindCSS |
-| Backend | Node.js + Express |
+| Backend | Node.js + Express (added after submission, in progress) |
 | APIs | OpenTripMap (geocoding & routing) |
 | Data | DEFRA CO₂ Emission Factors |
 | Tools | Vite |
@@ -136,3 +135,11 @@ This project is for academic use as part of the Final Year Project at the Univer
 **Andzhelo Rudzheri**  
 BSc Computer Science
 University of Westminster
+
+---
+
+## How this project was built
+
+The first version of the interface was generated with Lovable (an AI app builder).
+
+I then extended the application by implementing the interactive map features and integrating OpenTripMap API for real-time location search and points of interest discovery. I developed the carbon-emission calculation logic based on DEFRA 2024 emission factors, added comprehensive input validation, and refined the user interface to create a more intuitive and user-friendly experience. I also enhanced the overall design and usability through iterative improvements and testing.
