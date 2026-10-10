@@ -1,4 +1,4 @@
-// Emission factors in kg CO2 per km per person
+// Emission factors in kg CO2 per km (per person; for car, per vehicle)
 export const EMISSION_FACTORS: Record<string, number> = {
   car: 0.21,
   bus: 0.089,
@@ -17,16 +17,24 @@ export const VEHICLE_LABELS: Record<string, string> = {
   walking: "Walking",
 };
 
+// Car emissions are per vehicle: more passengers do not add emissions.
+const PER_VEHICLE_MODES = new Set(["car"]);
+
+function travellersCounted(vehicleType: string, groupSize: number): number {
+  return PER_VEHICLE_MODES.has(vehicleType) ? 1 : groupSize;
+}
+
 export function calculateEmissions(distanceKm: number, vehicleType: string, groupSize: number = 1): number {
   const factor = EMISSION_FACTORS[vehicleType] ?? 0;
-  return Math.round(distanceKm * factor * groupSize * 100) / 100;
+  const people = travellersCounted(vehicleType, groupSize);
+  return Math.round(distanceKm * factor * people * 100) / 100;
 }
 
 export function compareAllModes(distanceKm: number, groupSize: number = 1) {
   return Object.entries(EMISSION_FACTORS).map(([mode, factor]) => ({
     mode,
     label: VEHICLE_LABELS[mode],
-    emissions: Math.round(distanceKm * factor * groupSize * 100) / 100,
+    emissions: Math.round(distanceKm * factor * travellersCounted(mode, groupSize) * 100) / 100,
   }));
 }
 
