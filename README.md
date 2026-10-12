@@ -140,6 +140,12 @@ University of Westminster
 
 ## How this project was built
 
-The first version of the interface was generated with Lovable (an AI app builder).
+The first version of the interface was generated with Lovable (an AI app builder) based on my project requirements. I then developed the project further, using a mix of Lovable prompts and my own code changes, to: 
 
-I then extended the application by implementing the interactive map features and integrating OpenTripMap API for real-time location search and points of interest discovery. I developed the carbon-emission calculation logic based on DEFRA 2024 emission factors, added comprehensive input validation, and refined the user interface to create a more intuitive and user-friendly experience. I also enhanced the overall design and usability through iterative improvements and testing.
+- add the interactive map and route display 
+- integrate the OpenTripMap API for location search and points of interest 
+- calculate carbon emissions using DEFRA conversion factors 
+- add input validation and warnings (for example, unrealistic distances for walking) 
+- refine the layout and styling 
+
+After submission (October 2026) I fixed the car-emissions calculation so it no longer grows with group size, and moved the API key to an environment variable.
